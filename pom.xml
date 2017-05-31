@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.genesys.isa</groupId>
+	<artifactId>isa-model</artifactId>
+	<version>0.7.5-SNAPSHOT</version>
+	<name>ISA 1.0 Model</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>0.4.35</version>
+				<configuration>
+					<fileExtensions>
+						<fileExtension>_schema.json</fileExtension>
+						<fileExtension>_schema</fileExtension>
+						<fileExtension>.json</fileExtension>
+					</fileExtensions>
+					<outputDirectory>${project.build.directory}/jsonschema</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>ISA v1</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourcePaths>
+								<sourcePath>${basedir}/src/main/resources/schemas/isa_model_version_1_0_schemas/core/</sourcePath>
+							</sourcePaths>
+							<targetPackage>org.genesys.isa.model.v1</targetPackage>
+						</configuration>
+					</execution>
+					<execution>
+						<id>ISA v2</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourcePaths>
+								<sourcePath>${basedir}/src/main/resources/schemas/isa_model_version_2_0_schemas/core/</sourcePath>
+							</sourcePaths>
+							<targetPackage>org.genesys.isa.model.v2</targetPackage>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
